@@ -6,12 +6,11 @@ export default function BookingForm() {
   const [formData, setFormData] = useState({ name: '', email: '', background: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setStatus('loading');
 
     try {
-      // Forward request details directly to your Next.js API router
       const res = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -51,7 +50,7 @@ export default function BookingForm() {
                 value={formData.name}
                 onChange={e => setFormData({ ...formData, name: e.target.value })}
                 className="w-full p-3.5 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 text-sm text-white transition placeholder-zinc-600"
-                placeholder="Filan Fisteku"
+                placeholder="Name Surname"
               />
             </div>
 

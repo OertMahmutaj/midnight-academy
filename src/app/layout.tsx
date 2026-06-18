@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css"; 
+import "./globals.css";
+import Navbar from "@/app/components/Navbar"; 
 
 export const metadata: Metadata = {
   title: "Midnight Academy | Premium Graphic Design Bootcamp",
@@ -14,6 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased bg-black text-white">
+        {/* Render Navbar globally across all child page views */}
+        <Navbar />
         {children}
       </body>
     </html>
