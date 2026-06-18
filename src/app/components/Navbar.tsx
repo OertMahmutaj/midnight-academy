@@ -12,10 +12,24 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  // Custom smooth-scrolling handler to bypass transition timing conflicts
+  // 1. Core Fix: Force viewport to scroll to absolute top
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (pathname === '/') {
+      // If already home, smoothly glide up to coordinate 0
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on portfolio, navigate home and Next.js will mount it at the top naturally
+      router.push('/');
+    }
+  };
+
+  // 2. Smart Apply Now Router
   const handleApplyNowClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    closeMenu(); // 1. Close the sidebar panel immediately
+    closeMenu();
 
     const targetScroll = () => {
       const element = document.getElementById('book');
@@ -24,11 +38,9 @@ export default function Navbar() {
       }
     };
 
-    // 2. If we are already on the homepage, wait for sidebar animation to clear, then scroll
     if (pathname === '/') {
       setTimeout(targetScroll, 300);
     } else {
-      // 3. If we are on the portfolio page, navigate home first, then find the anchor element
       router.push('/#book');
     }
   };
@@ -50,13 +62,13 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Structural Fixed Top Bar Header */}
+      {/* Structural Fixed Top Bar Header */}
       <header className="fixed top-0 left-0 w-full h-20 bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/80 z-50 flex items-center justify-between px-6 transition-colors duration-300">
         
-        {/* Brand Logotype */}
+        {/* FIXED: Using next/link instead of an <a> element to satisfy ESLint rules */}
         <Link 
           href="/" 
-          onClick={closeMenu}
+          onClick={handleHomeClick}
           className="text-sm font-black tracking-widest text-[var(--text-primary)] uppercase hover:opacity-70 transition duration-200"
         >
           Midnight Academy //
@@ -70,7 +82,7 @@ export default function Navbar() {
             onClick={toggleTheme}
             className="text-[10px] font-bold font-mono tracking-wider px-3 py-1.5 border border-zinc-300 dark:border-zinc-800 rounded bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-all duration-200"
           >
-            [ THEME // TOGGLE ]
+            [ LIGHT // DARK ]
           </button>
 
           {/* Minimalist Hamburger Button Trigger */}
@@ -89,7 +101,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* 2. Full-Screen Backdrop Overlay Mask */}
+      {/* Full-Screen Backdrop Overlay Mask */}
       <div
         onClick={closeMenu}
         className={`fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
@@ -97,17 +109,22 @@ export default function Navbar() {
         }`}
       />
 
-      {/* 3. Sliding Minimalist Sidebar Panel */}
+      {/* Sliding Minimalist Sidebar Panel */}
       <nav className={`fixed top-0 right-0 h-screen w-full sm:w-[380px] bg-[var(--bg-primary)] border-l border-zinc-200 dark:border-zinc-900 p-12 pt-32 flex flex-col justify-between transform transition-transform duration-300 ease-in-out z-45 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col space-y-8 font-black text-2xl tracking-tighter uppercase text-[var(--text-primary)]">
-          <Link href="/" onClick={closeMenu} className="hover:opacity-60 transition duration-200 flex items-baseline gap-4">
+          
+          {/* Home Link (Intercepted for instant scroll-to-top) */}
+          <button 
+            onClick={handleHomeClick} 
+            className="text-left hover:opacity-60 transition duration-200 flex items-baseline gap-4 w-full cursor-pointer bg-transparent border-none p-0 uppercase font-black text-2xl tracking-tighter text-[var(--text-primary)]"
+          >
             <span className="font-mono text-xs text-[var(--text-secondary)] opacity-40">01</span> Home
-          </Link>
+          </button>
+
           <Link href="/portfolio" onClick={closeMenu} className="hover:opacity-60 transition duration-200 flex items-baseline gap-4">
             <span className="font-mono text-xs text-[var(--text-secondary)] opacity-40">02</span> Portfolios
           </Link>
           
-          {/* CRITICAL CHANGE HERE: Trigger the dynamic layout scrolling execution */}
           <button 
             onClick={handleApplyNowClick} 
             className="text-left hover:opacity-60 transition duration-200 flex items-baseline gap-4 w-full cursor-pointer bg-transparent border-none p-0 uppercase font-black text-2xl tracking-tighter text-[var(--text-primary)]"
