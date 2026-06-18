@@ -21,7 +21,7 @@ export default function Instructor() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
             <p className="text-zinc-400 text-sm font-light leading-relaxed">
-              We believe graphic design cannot be taught effectively by academic professors who haven`&apos;`t pitched a real client contract in ten years. Midnight Academy was built to serve as an antidote to outdated regional training programs.
+              We believe graphic design cannot be taught effectively by academic professors who haven&apos;t pitched a real client contract in ten years. Midnight Academy was built to serve as an antidote to outdated regional training programs.
             </p>
             <p className="text-zinc-400 text-sm font-light leading-relaxed">
               You will work directly inside a real agency workflow environment, learning the exact communication mechanics, asset handoffs, and visual strategies used to command premium rates in modern design industries.
