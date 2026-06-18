@@ -29,7 +29,7 @@ export default function Home() {
       {/* Minimal Agency Footer */}
       <footer className="py-12 border-t border-zinc-950 text-center text-xs text-zinc-600">
         <p>© {new Date().getFullYear()} Midnight Academy. All rights reserved.</p>
-        <p className="mt-2 text-zinc-700 font-mono">Built by Developers. Designed by Creative Directors.</p>
+        <p className="mt-2 text-zinc-700 font-mono">Built and designed by Oert Mahmutaj.</p>
       </footer>
     </main>
   );

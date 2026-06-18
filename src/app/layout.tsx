@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css"; // Ensure your Tailwind styles are imported here
+import "./globals.css"; 
 
 export const metadata: Metadata = {
   title: "Midnight Academy | Premium Graphic Design Bootcamp",
