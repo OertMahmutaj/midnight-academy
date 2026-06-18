@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/Navbar"; 
+import Navbar from "@/app/components/Navbar";
+
+// Load only the premium mono font globally
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Midnight Academy | Premium Graphic Design Bootcamp",
@@ -14,8 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
-      <body className="antialiased bg-black text-white">
-        {/* Render Navbar globally across all child page views */}
+      <body
+        className={`${geistMono.variable} antialiased bg-black text-white`}
+      >
         <Navbar />
         {children}
       </body>

@@ -38,7 +38,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 py-24 md:py-32 selection:bg-white selection:text-black antialiased">
+    <main className="min-h-screen bg-black text-white px-4 pt-40 pb-24 md:py-32 selection:bg-white selection:text-black antialiased">
       {/* Structural Framing Grid Background Accent */}
       <div className="max-w-5xl mx-auto">
         

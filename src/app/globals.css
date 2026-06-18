@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
 /* 1. Global Base Theme Style Overrides */
 html {
   background-color: #000000;
@@ -14,21 +18,25 @@ html::selection {
   color: #000000;
 }
 
+h1, h2, h3, h4, p, span, a, input, textarea, button {
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
+}
+
 h1, h2, h3, h4 {
   color: #ffffff;
-  font-weight: 900;
-  letter-spacing: -0.05em;
+  font-weight: 800; /* slightly lower from 900 so mono stays super crisp */
+  letter-spacing: -0.04em;
 }
 
 p {
-  color: #a1a1aa; /* matches zinc-400 */
+  color: #a1a1aa; /* zinc-400 */
   font-weight: 300;
-  letter-spacing: normal;
+  letter-spacing: -0.01em;
 }
 
 /* 2. Heights-Style Structural Tokens */
 .heights-grid-border {
-  border-bottom: 1px solid rgba(39, 39, 42, 0.8); /* zinc-800/80 */
+  border-bottom: 1px solid rgba(39, 39, 42, 0.8);
   padding-top: 3rem;
   padding-bottom: 3rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -40,15 +48,14 @@ p {
   }
 }
 .heights-grid-border:hover {
-  background-color: rgba(9, 9, 11, 0.3); /* zinc-950/30 */
+  background-color: rgba(9, 9, 11, 0.3);
 }
 
 .heights-tag {
   padding: 0.25rem 0.625rem;
-  background-color: rgba(24, 24, 27, 0.5); /* zinc-900/50 */
-  border: 1px solid #27272a; /* zinc-800 */
-  color: #a1a1aa; /* zinc-400 */
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background-color: rgba(24, 24, 27, 0.5);
+  border: 1px solid #27272a;
+  color: #a1a1aa;
   font-size: 11px;
   border-radius: 0.25rem;
   letter-spacing: 0.05em;
@@ -61,14 +68,14 @@ p {
   background-color: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #27272a; /* zinc-800 */
+  border-bottom: 1px solid #27272a;
   color: #ffffff;
   font-size: 0.875rem;
   letter-spacing: -0.025em;
   transition: all 0.3s ease;
 }
 .heights-input::placeholder {
-  color: #52525b; /* zinc-600 */
+  color: #52525b;
 }
 .heights-input:focus {
   outline: none;
@@ -84,7 +91,6 @@ p {
   color: #000000;
   font-size: 0.75rem;
   font-weight: 700;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: 0.25rem;
@@ -92,7 +98,7 @@ p {
   cursor: pointer;
 }
 .heights-btn-primary:hover {
-  background-color: #e4e4e7; /* zinc-200 */
+  background-color: #e4e4e7;
 }
 
 .heights-btn-secondary {
@@ -101,11 +107,10 @@ p {
   justify-content: center;
   padding: 0.875rem 1.5rem;
   background-color: transparent;
-  color: #a1a1aa; /* zinc-400 */
-  border: 1px solid #27272a; /* zinc-800 */
+  color: #a1a1aa;
+  border: 1px solid #27272a;
   font-size: 0.75rem;
   font-weight: 700;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: 0.25rem;
