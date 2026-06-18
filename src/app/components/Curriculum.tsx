@@ -1,8 +1,56 @@
+'use client';
+
+import React from 'react';
+
+interface SyllabusWeek {
+  num: string;
+  topic: string;
+  focus: string;
+  details: string;
+}
+
+const WEEKS: SyllabusWeek[] = [
+  { num: "WK // 01-02", topic: "Core Typography Systems", focus: "Logotypes & Structural Grid Rules", details: "Master kerning, type selection, optical balance, and vector path precision. Learn why typography dictates 90% of a premium brand's value." },
+  { num: "WK // 03-04", topic: "Commercial Brand Architecture", focus: "Corporate Guidelines & Assets", details: "Translate visual strategies into full asset systems. Build complete, responsive brand manuals for international corporate structures." },
+  { num: "WK // 05-06", topic: "Industrial Packaging Design", focus: "3D Spatial Layouts & Production Lines", details: "Design for real-world physical dimensions. Master die-lines, material texturing, print finishes, and physical manufacturing setup rules." },
+  { num: "WK // 07-08", topic: "The Elite Agency Workflow", focus: "Portfolio Polish & Client Conversion", details: "Construct high-end case studies exactly like this website. Learn how to pitch, contract, and close multi-thousand-euro design deals." }
+];
+
 export default function Curriculum() {
-      return (
-        <section className="max-w-4xl mx-auto py-16 px-4">
-          <h2 className="text-3xl font-bold mb-6">The 8-Week Blueprint</h2>
-          <p className="text-zinc-400 text-sm">Weekly breakdowns of branding, vector typography systems, and commercial package layout modules...</p>
-        </section>
-      );
-    }
+  return (
+    <section id="curriculum" className="px-6 py-24 max-w-6xl mx-auto">
+      {/* Section Header */}
+      <div className="max-w-3xl mb-16">
+        <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-4">Program Blueprint</span>
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tighter">The 8-Week Core Modules.</h2>
+      </div>
+
+      {/* The Heights-Style Stacked Rows */}
+      <div className="border-t border-zinc-800/80">
+        {WEEKS.map((week, index) => (
+          <div key={index} className="heights-grid-border grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-x-12 items-start px-2">
+            
+            {/* Metadata Counter (Left) */}
+            <div className="md:col-span-3">
+              <span className="font-mono text-xs text-zinc-500 font-semibold">{week.num}</span>
+            </div>
+
+            {/* Core Topic Title (Center) */}
+            <div className="md:col-span-5">
+              <h3 className="text-xl font-bold tracking-tight text-white mb-1">{week.topic}</h3>
+              <p className="text-xs font-mono text-zinc-500 tracking-wide">{week.focus}</p>
+            </div>
+
+            {/* Deep Context Explanation (Right) */}
+            <div className="md:col-span-4">
+              <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                {week.details}
+              </p>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
