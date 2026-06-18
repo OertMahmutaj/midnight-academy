@@ -23,9 +23,11 @@ export default function BookingForm() {
       } else {
         setStatus('error');
       }
-    } catch (err) {
-      setStatus('error');
-    }
+    } catch (error) {
+  console.error("Backend Error:", error); 
+  
+  return Response.json({ error: 'Internal Server Error' }, { status: 500 });
+}
   };
 
   return (
