@@ -3,15 +3,13 @@ import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 
-// Load only the premium mono font globally
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Midnight Academy | Premium Graphic Design Bootcamp",
-  description: "Learn Graphic Design from a 12-Year Creative Director. Right here in Tirana.",
+  title: "Midnight Academy | Premium Graphic Design",
 };
 
 export default function RootLayout({
@@ -20,10 +18,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
-      <body
-        className={`${geistMono.variable} antialiased bg-black text-white`}
-      >
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth"
+    suppressHydrationWarning={true}>
+      <head>
+        {/* Anti-flash inline theme loader block */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const saved = localStorage.getItem('theme');
+                if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
+      <body className={`${geistMono.variable} antialiased`}>
         <Navbar />
         {children}
       </body>

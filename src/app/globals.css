@@ -1,21 +1,64 @@
 @import "tailwindcss";
 
+/* 1. Root Variable Infrastructure (Default Light Theme) */
 :root {
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
+  --bg-primary: #fcfcfc;
+  --text-primary: #000000;
+  --text-secondary: #52525b;
+  --border-line: rgba(228, 228, 231, 0.9);
+  --hover-tint: rgba(244, 244, 245, 0.6);
+  --badge-bg: rgba(244, 244, 245, 0.8);
+  --input-placeholder: #a1a1aa;
+  
+  --btn-main-bg: #000000;
+  --btn-main-text: #ffffff;
+  --btn-main-hover: #27272a;
 }
 
-/* 1. Global Base Theme Style Overrides */
+/* 2. Dark Mode Overrides (Triggers via System Media Query OR Manual .dark class) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-force) {
+    --bg-primary: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --border-line: rgba(39, 39, 42, 0.8);
+    --hover-tint: rgba(9, 9, 11, 0.4);
+    --badge-bg: rgba(24, 24, 27, 0.5);
+    --input-placeholder: #52525b;
+    --btn-main-bg: #ffffff;
+    --btn-main-text: #000000;
+    --btn-main-hover: #e4e4e7;
+  }
+}
+
+/* When the HTML tag has the hardcoded 'dark' class */
+.dark {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --border-line: rgba(39, 39, 42, 0.8);
+  --hover-tint: rgba(9, 9, 11, 0.4);
+  --badge-bg: rgba(24, 24, 27, 0.5);
+  --input-placeholder: #52525b;
+  --btn-main-bg: #ffffff;
+  --btn-main-text: #000000;
+  --btn-main-hover: #e4e4e7;
+}
+
+/* 3. Global Structural Assignments */
 html {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 html::selection {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 h1, h2, h3, h4, p, span, a, input, textarea, button {
@@ -23,20 +66,20 @@ h1, h2, h3, h4, p, span, a, input, textarea, button {
 }
 
 h1, h2, h3, h4 {
-  color: #ffffff;
-  font-weight: 800; /* slightly lower from 900 so mono stays super crisp */
+  color: var(--text-primary);
+  font-weight: 800;
   letter-spacing: -0.04em;
 }
 
 p {
-  color: #a1a1aa; /* zinc-400 */
+  color: var(--text-secondary);
   font-weight: 300;
   letter-spacing: -0.01em;
 }
 
-/* 2. Heights-Style Structural Tokens */
+/* 4. Adaptive Component Framework Tokens */
 .heights-grid-border {
-  border-bottom: 1px solid rgba(39, 39, 42, 0.8);
+  border-bottom: 1px solid var(--border-line);
   padding-top: 3rem;
   padding-bottom: 3rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -48,14 +91,14 @@ p {
   }
 }
 .heights-grid-border:hover {
-  background-color: rgba(9, 9, 11, 0.3);
+  background-color: var(--hover-tint);
 }
 
 .heights-tag {
   padding: 0.25rem 0.625rem;
-  background-color: rgba(24, 24, 27, 0.5);
-  border: 1px solid #27272a;
-  color: #a1a1aa;
+  background-color: var(--badge-bg);
+  border: 1px solid var(--border-line);
+  color: var(--text-secondary);
   font-size: 11px;
   border-radius: 0.25rem;
   letter-spacing: 0.05em;
@@ -68,18 +111,18 @@ p {
   background-color: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #27272a;
-  color: #ffffff;
+  border-bottom: 1px solid var(--border-line);
+  color: var(--text-primary);
   font-size: 0.875rem;
   letter-spacing: -0.025em;
   transition: all 0.3s ease;
 }
 .heights-input::placeholder {
-  color: #52525b;
+  color: var(--input-placeholder);
 }
 .heights-input:focus {
   outline: none;
-  border-color: #ffffff;
+  border-color: var(--text-primary);
 }
 
 .heights-btn-primary {
@@ -87,8 +130,8 @@ p {
   align-items: center;
   justify-content: center;
   padding: 0.875rem 1.5rem;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--btn-main-bg);
+  color: var(--btn-main-text);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -98,7 +141,7 @@ p {
   cursor: pointer;
 }
 .heights-btn-primary:hover {
-  background-color: #e4e4e7;
+  background-color: var(--btn-main-hover);
 }
 
 .heights-btn-secondary {
@@ -107,8 +150,8 @@ p {
   justify-content: center;
   padding: 0.875rem 1.5rem;
   background-color: transparent;
-  color: #a1a1aa;
-  border: 1px solid #27272a;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-line);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -118,6 +161,6 @@ p {
   cursor: pointer;
 }
 .heights-btn-secondary:hover {
-  border-color: #a1a1aa;
-  color: #ffffff;
+  border-color: var(--text-primary);
+  color: var(--text-primary);
 }

@@ -18,32 +18,27 @@ const WEEKS: SyllabusWeek[] = [
 
 export default function Curriculum() {
   return (
-    <section id="curriculum" className="px-6 py-24 max-w-6xl mx-auto">
-      {/* Section Header */}
+    <section id="curriculum" className="px-6 py-24 max-w-6xl mx-auto bg-transparent transition-colors duration-300">
       <div className="max-w-3xl mb-16">
-        <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-4">Program Blueprint</span>
-        <h2 className="text-3xl sm:text-5xl font-black tracking-tighter">The 8-Week Core Modules.</h2>
+        <span className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-4">Program Blueprint</span>
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tighter text-[var(--text-primary)]">The 8-Week Core Modules.</h2>
       </div>
 
-      {/* The Heights-Style Stacked Rows */}
-      <div className="border-t border-zinc-800/80">
+      <div className="border-t border-[var(--border-line)]">
         {WEEKS.map((week, index) => (
           <div key={index} className="heights-grid-border grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-x-12 items-start px-2">
             
-            {/* Metadata Counter (Left) */}
             <div className="md:col-span-3">
-              <span className="font-mono text-xs text-zinc-500 font-semibold">{week.num}</span>
+              <span className="font-mono text-xs text-[var(--text-secondary)] font-semibold">{week.num}</span>
             </div>
 
-            {/* Core Topic Title (Center) */}
             <div className="md:col-span-5">
-              <h3 className="text-xl font-bold tracking-tight text-white mb-1">{week.topic}</h3>
-              <p className="text-xs font-mono text-zinc-500 tracking-wide">{week.focus}</p>
+              <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-1">{week.topic}</h3>
+              <p className="text-xs font-mono text-[var(--text-secondary)] tracking-wide">{week.focus}</p>
             </div>
 
-            {/* Deep Context Explanation (Right) */}
             <div className="md:col-span-4">
-              <p className="text-sm text-zinc-400 font-light leading-relaxed">
+              <p className="text-sm text-[var(--text-secondary)] font-light leading-relaxed">
                 {week.details}
               </p>
             </div>

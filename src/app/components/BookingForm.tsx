@@ -6,96 +6,69 @@ export default function BookingForm() {
   const [formData, setFormData] = useState({ name: '', email: '', background: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-
     try {
       const res = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', background: '' });
       } else {
         setStatus('error');
       }
-    } catch (error) {
-  console.error("Backend Error:", error); 
-  
-  return Response.json({ error: 'Internal Server Error' }, { status: 500 });
-}
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
-    <section id="book" className="py-20 px-4 max-w-xl mx-auto">
-      <div className="p-8 bg-zinc-950 text-white rounded-xl border border-zinc-900 relative">
-        <h2 className="text-2xl font-bold mb-2 tracking-tight">Request Enrollment</h2>
-        <p className="text-zinc-400 mb-8 text-sm leading-relaxed">
-          No automated payments. We manually review every single booking request to ensure all 15 candidates are a perfect fit for our studio environment.
+    <section id="book" className="px-6 py-24 md:py-36 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 bg-transparent transition-colors duration-300">
+      
+      <div className="lg:col-span-4 space-y-4">
+        <span className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase block">Intakes</span>
+        <h2 className="text-3xl font-black tracking-tight uppercase text-[var(--text-primary)]">Request <br />Enrollment</h2>
+        <p className="text-sm text-[var(--text-secondary)] max-w-sm leading-relaxed pt-4">
+          All slots are manually assigned. We interview applicants to ensure each member can execute tasks at an agency level.
         </p>
+      </div>
 
+      <div className="lg:col-span-8">
         {status === 'success' ? (
-          <div className="p-5 bg-zinc-900 border border-zinc-800 text-zinc-100 rounded-lg text-center text-sm font-medium">
-            ✨ Application received! Check your email inbox. Our team will review your background and respond within 24 hours.
+          <div className="p-6 bg-[var(--badge-bg)] border border-[var(--border-line)] text-sm tracking-tight text-[var(--text-primary)] font-mono rounded">
+            ✨ Entry pipeline dispatched. Our creative desk will check your data profile and contact your email within 24 hours.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2 font-bold font-mono">Full Name</label>
-              <input
-                required
-                type="text"
-                value={formData.name}
-                onChange={e => setFormData({ ...formData, name: e.target.value })}
-                className="w-full p-3.5 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 text-sm text-white transition placeholder-zinc-600"
-                placeholder="Name Surname"
-              />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-1">Full Name</label>
+                <input required type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="heights-input" placeholder="Name Surname" />
+              </div>
+              <div>
+                <label className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-1">Email Address</label>
+                <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="heights-input" placeholder="name@domain.com" />
+              </div>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2 font-bold font-mono">Email Address</label>
-              <input
-                required
-                type="email"
-                value={formData.email}
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                className="w-full p-3.5 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 text-sm text-white transition placeholder-zinc-600"
-                placeholder="name@domain.com"
-              />
+              <label className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-1">Professional Focus / Context</label>
+              <textarea required value={formData.background} onChange={e => setFormData({ ...formData, background: e.target.value })} rows={3} className="heights-input resize-none" placeholder="Briefly describe your objectives..." />
             </div>
 
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2 font-bold font-mono">Your Background / Objectives</label>
-              <textarea
-                required
-                value={formData.background}
-                onChange={e => setFormData({ ...formData, background: e.target.value })}
-                rows={4}
-                className="w-full p-3.5 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 text-sm text-white transition resize-none placeholder-zinc-600 leading-relaxed"
-                placeholder="Tell us about yourself. Total beginner looking for a carrier pivot, or a junior designer looking to polish your skills?"
-              />
+            <div className="pt-4">
+              <button type="submit" disabled={status === 'loading'} className="heights-btn-primary w-full sm:w-auto">
+                {status === 'loading' ? 'Processing...' : 'Submit Application'}
+              </button>
             </div>
-
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="w-full py-4 bg-white text-black font-bold rounded-lg hover:bg-zinc-200 transition duration-200 text-sm tracking-wide disabled:opacity-40"
-            >
-              {status === 'loading' ? 'Submitting Request...' : 'Submit Booking Application'}
-            </button>
-
-            {status === 'error' && (
-              <p className="text-rose-400 text-xs text-center font-medium mt-2">
-                Pipeline execution error. Please try again.
-              </p>
-            )}
           </form>
         )}
       </div>
+
     </section>
   );
 }

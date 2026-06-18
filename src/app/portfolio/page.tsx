@@ -1,126 +1,106 @@
 import React from 'react';
 import Link from 'next/link';
 
-// Strict TypeScript structure for our expert case studies
 interface CaseStudy {
   id: string;
   title: string;
   client: string;
-  category: string;
-  year: string;
-  problem: string;
-  solution: string;
-  deliverables: string[];
+  industry: string;
+  scope: string[];
+  metrics: string;
+  summary: string;
 }
 
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: "01",
-    title: "Rebranding Albania's Premier Specialty Coffee Chain",
-    client: "Mulliri i Vjetër (Concept Remaster)",
-    category: "Brand Identity & Packaging Systems",
-    year: "2025",
-    problem: "The client needed to shift from a nostalgic, traditional local coffee aesthetic to an aggressive, modern, third-wave international design footprint to capture a younger demographic.",
-    solution: "Developed a custom, razor-sharp vector typography system paired with stark, raw packaging textures. Dropped standard coffee patterns for custom minimalist layouts that stand out immediately on retail shelving units.",
-    deliverables: ["Visual Strategy", "Custom Logotype", "Industrial Packaging Layouts", "Brand Guidelines Book"]
+    client: "Mulliri i Vjetër",
+    industry: "Retail & Franchise Concept",
+    title: "Transforming Albania’s commercial coffee presence for a global generation.",
+    scope: ["Brand Strategy", "Visual Identity", "Packaging Systems"],
+    metrics: "+42% Brand Recall",
+    summary: "Reconstructed a deeply rooted regional identity into a hyper-modern visual ecosystem. Stripped away generic elements to introduce structural, typographic packaging layouts that command physical retail shelves."
   },
   {
     id: "02",
-    title: "Scaling Digital Design Architecture for a Fintech Platform",
     client: "Delphi Pay Europe",
-    category: "Product UI/UX & Visual Systems",
-    year: "2026",
-    problem: "A high-volume transactional platform was losing user conversion rates due to complex data visualization graphs and messy interface components on their client onboarding portal.",
-    solution: "Stripped away unnecessary styling accents and built a highly strict, minimalist components layout hierarchy. Standardized form user interfaces which reduced conversion friction drops by over 34%.",
-    deliverables: ["UX Architecture Blueprint", "Design System Infrastructure", "High-Density Data Visuals"]
+    industry: "Fintech Interface Platform",
+    title: "Engineering a high-density design system to eliminate user onboarding friction.",
+    scope: ["UX Architecture", "Design System", "Product Design"],
+    metrics: "-34% Funnel Friction",
+    summary: "Standardized the digital banking application infrastructure for a cross-border remittance portal. Replaced messy dashboard metrics with crisp typography, drastically scaling transactional clarity."
   }
 ];
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 pt-40 pb-24 md:py-32 selection:bg-white selection:text-black antialiased">
-      {/* Structural Framing Grid Background Accent */}
-      <div className="max-w-5xl mx-auto">
+    <main className="min-h-screen bg-transparent px-6 pt-40 pb-24 selection:bg-[var(--text-primary)] selection:text-[var(--bg-primary)] antialiased transition-colors duration-300">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Page Header */}
-        <header className="mb-20 border-b border-zinc-900 pb-12 relative">
-          <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-4">Executive Track Record</span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6">
-            Selected Agency <br />
-            <span className="text-zinc-500">Case Studies.</span>
+        {/* Editorial Section Header */}
+        <header className="max-w-3xl mb-20">
+          <span className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-4">Production Archive</span>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tighter text-[var(--text-primary)]">
+            Case Studies.
           </h1>
-          <p className="text-zinc-400 text-base max-w-xl leading-relaxed">
-            A raw, deep look inside the execution modules taught at Midnight Academy. We do not design placeholders; we construct elite commercial assets.
-          </p>
         </header>
 
-        {/* Asymmetrical Case Studies List Container */}
-        <section className="space-y-24">
-          {CASE_STUDIES.map((study) => (
-            <article key={study.id} className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-zinc-900 pb-20 last:border-0 last:pb-0">
-              
-              {/* Left Identifier Metadata Block */}
-              <div className="lg:col-span-4 space-y-6">
-                <div className="text-5xl font-black font-mono text-zinc-800 tracking-tighter">
-                  {study.id}
+        {/* The Strict Heights-Style Stacked Rows */}
+        <div className="border-t border-[var(--border-line)]">
+          {CASE_STUDIES.map((project) => (
+            <div 
+              key={project.id} 
+              className="heights-grid-border grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-x-12 items-start px-2"
+            >
+              {/* Column 1: Metadata Counter (Left) */}
+              <div className="md:col-span-3 space-y-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-mono text-xs text-[var(--text-secondary)] opacity-50">{project.id}</span>
+                  <h3 className="text-lg font-bold tracking-tight text-[var(--text-primary)]">{project.client}</h3>
                 </div>
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-1">Project Client</h3>
-                  <p className="text-sm font-semibold text-zinc-200">{study.client}</p>
-                </div>
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-1">Core Discipline</h3>
-                  <p className="text-sm font-semibold text-zinc-200">{study.category}</p>
-                </div>
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-1">Timeline</h3>
-                  <p className="text-sm font-semibold text-zinc-200">Execution / {study.year}</p>
+                <p className="text-xs font-mono text-[var(--text-secondary)] tracking-wide uppercase">{project.industry}</p>
+                <div className="pt-1">
+                  <span className="heights-tag">{project.metrics}</span>
                 </div>
               </div>
 
-              {/* Right Context & Strategy Description Block */}
-              <div className="lg:col-span-8 space-y-8">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-snug text-white">
-                  {study.title}
+              {/* Column 2: Core Statement & Explanation (Center) */}
+              <div className="md:col-span-5 space-y-4">
+                <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] leading-snug">
+                  {project.title}
                 </h2>
-                
-                <div className="space-y-4">
-                  <h4 className="text-xs font-mono tracking-widest uppercase text-zinc-500 font-bold">The Strategic Problem</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{study.problem}</p>
-                </div>
+                <p className="text-sm text-[var(--text-secondary)] font-light leading-relaxed">
+                  {project.summary}
+                </p>
+              </div>
 
-                <div className="space-y-4">
-                  <h4 className="text-xs font-mono tracking-widest uppercase text-zinc-500 font-bold">The Design Transformation</h4>
-                  <p className="text-zinc-300 text-sm leading-relaxed">{study.solution}</p>
-                </div>
-
-                {/* Scope Badges */}
-                <div className="pt-4">
-                  <h4 className="text-xs font-mono tracking-widest uppercase text-zinc-500 font-bold mb-3">Deliverables Scope</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {study.deliverables.map((item, idx) => (
-                      <span key={idx} className="px-3 py-1.5 bg-zinc-950 border border-zinc-900 text-zinc-400 font-mono text-[11px] rounded-md tracking-wide">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
+              {/* Column 3: Deliverables Scope Grid (Right) */}
+              <div className="md:col-span-4 space-y-4 md:text-right">
+                <span className="text-[10px] font-mono tracking-wider text-[var(--text-secondary)] block uppercase">Deliverables</span>
+                <div className="flex flex-wrap md:justify-end gap-1.5">
+                  {project.scope.map((tag, idx) => (
+                    <span key={idx} className="heights-tag">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-            </article>
+            </div>
           ))}
-        </section>
-
-        {/* Dynamic Page Footer Navigation Trigger */}
-        <div className="mt-24 pt-12 border-t border-zinc-950 text-center">
-          <p className="text-zinc-500 text-sm mb-6">Ready to stop guessing and master this direct level of design execution?</p>
-          <Link 
-            href="/#book" 
-            className="inline-block px-8 py-4 bg-white text-black font-bold text-sm rounded-lg hover:bg-zinc-200 transition duration-200"
-          >
-            Claim 1 of our 15 Seats
-          </Link>
         </div>
+
+        {/* Minimalist Bottom CTA Block */}
+        <footer className="mt-32 max-w-3xl border-t border-[var(--border-line)] pt-16">
+          <span className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase block mb-4">Next Cohort Setup</span>
+          <h4 className="text-2xl font-bold tracking-tight mb-4 text-[var(--text-primary)]">Ready to design at this baseline?</h4>
+          <p className="text-[var(--text-secondary)] text-sm max-w-xl mb-8 font-light leading-relaxed">
+            We break down the exact tactical workflow mechanisms, typography rules, and strategic presentation blueprints used to create the work displayed above.
+          </p>
+          <Link href="/#book" className="heights-btn-primary">
+            Apply Now
+          </Link>
+        </footer>
 
       </div>
     </main>

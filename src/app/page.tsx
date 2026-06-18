@@ -13,7 +13,7 @@ export default function Home() {
       <BookingForm />
       
       {/* Minimal Agency Footer matching Heights */}
-      <footer className="px-6 pt-40 max-w-6xl mx-auto border-t border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-mono text-zinc-600">
+      <footer className="px-6 pt-40 max-w-6xl mx-auto bg-transparent border-t border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-mono text-zinc-600">
         <p>© {new Date().getFullYear()} MIDNIGHT ACADEMY. ALL RIGHTS RESERVED.</p>
         <p className="tracking-widest">TIRANA // ALBANIA</p>
       </footer>
