@@ -6,7 +6,7 @@ export default function BookingForm() {
   const [formData, setFormData] = useState({ name: '', email: '', instagram: '', experience: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setStatus('loading');
 
@@ -23,9 +23,12 @@ export default function BookingForm() {
       } else {
         setStatus('error');
       }
-    } catch (err) {
-      setStatus('error');
-    }
+    } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown pipeline error';
+    
+    console.error('Booking pipeline error:', errorMessage);
+    return Response.json({ error: 'Internal server error' }, { status: 500 });
+  }
   };
 
   return (
